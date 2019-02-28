@@ -14,12 +14,18 @@
       "**/node_modules/**"
     ],
     "rewrites": [ {
-      "source": "**",
-      "function": "/index"
-    }, {
-      "source": "ps",
+      "source": "/ps",
       "destination": "https://itunes.apple.com/jp/app/sdvxpsiv/id1287152421?mt=8",
       "type": 302
+    }, {
+      "source": "/",
+      "function": "index"
+    }, {
+      "source": "/index",
+      "function": "index"
+    }, {
+      "source": "/**",
+      "function": "index"
     } ]
   }
 }

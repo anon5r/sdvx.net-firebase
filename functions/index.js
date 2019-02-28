@@ -2,51 +2,63 @@ const functions = require('firebase-functions');
 
 exports.index=functions.https.onRequest((req, res) => {
     console.info('req.path=',req.path);
-    switch (req.path) {
-        case null:
-        {
-            let nextRelease = new Date();
-            nextRelease.setFullYear(2019);	// 2019
-            nextRelease.setMonth(1);	// Feb
-            nextRelease.setDate(28);	// 28
-            if (Date.now() >= nextRelease.getTime())
-                res.redirect('https://p.eagate.573.jp/game/sdvx/v/p');
-            else
-                res.redirect('https://p.eagate.573.jp/game/sdvx/v/p');
-            break;
+    let pathWithoutSlash = (req.path !== null) ? req.path.substr(1) : '';
+
+    if (req.path === null || req.path === '/') {
+        let nextRelease = new Date();
+        nextRelease.setFullYear(2019);	// 2019
+        nextRelease.setMonth(1);	// Feb
+        nextRelease.setDate(28);	// 28
+        if (Date.now() >= nextRelease.getTime())
+            res.redirect('https://p.eagate.573.jp/game/sdvx/v/p');
+        else
+            res.redirect('https://p.eagate.573.jp/game/sdvx/iv/p');
+    } else if (/^\d+\/?/.test(pathWithoutSlash)) {
+        let r = req.path.match(/\d+/);  // req.path will start /3 or /4 or /5
+        let romanNum = numberToRoman(r[0]).toLowerCase();
+        if (romanNum === 'i')
+            romanNum = 'sv';
+        let addPath = '/';
+        if (req.path.length>(r[0].length+1))
+            addPath = req.path.substr(r[0].length+1);
+        res.redirect('https://p.eagate.573.jp/game/sdvx/' + romanNum + '/p'+addPath);
+        //res.send('https://p.eagate.573.jp/game/sdvx/' + romanNum + '/p'+addPath);
+    } else if (/^(gw|hh|vw)\/?/i.test(pathWithoutSlash)) {
+        // Short code
+        let version = 'sv';
+        switch (pathWithoutSlash.substring(0, 2).toLowerCase()) {
+            case 'gw':
+                version = 'iii';
+                break;     // GRAVITY WARS
+            case 'hh':
+                version = 'iv';
+                break;      // Heavenly Haven
+            case 'vw':
+                version = 'v';
+                break;       // Vivid Wave
         }
-        case /^\d+?/.test(req.path): {
-            let r = req.path.match(/\d+?/);
-            let romanNum = numberToRoman(r[0]).toLowerCase();
-            if (romanNum === 'i')
-                romanNum = 'sv';
-            let addPath = '/';
-            if (req.path.length>r[0].length)
-                addPath = '/' + req.path.substr(r[0].length);
-            res.redirect('https://p.eagate.573.jp/game/sdvx/' + romanNum + '/p'+addPath);
-            break;
-        }
-        case /^[ivx]+?/gi.test(req.path): {
-            let r = req.path.match(/[ivx]+?/);
-            let version = r[0];
-            if (version==='i')
-                version = 'sv';
-            let addPath = '/';
-            if (req.path.length>r[0].length)
-                addPath = '/' + req.path.substr(r[0].length);
-            res.redirect('https://p.eagate.573.jp/game/sdvx/' + version + '/p'+addPath);
-            break;
-        }
-        case '/ps':
-            res.redirect('https://itunes.apple.com/jp/app/sdvxpsiv/id1287152421?mt=8');
-            break;
-        case /floor\/?/.test(req.path): {
-            let addPath = req.path.substr(5);
-            res.redirect('https://p.eagate.573.jp/game/sdvx/sv/p/floor/' + addPath);
-            break;
-        }
-        default:
-            res.redirect('https://p.eagate.573.jp/game/sdvx/v/p'+req.path);
+        let addPath = '';
+        if (req.path.length > 3)    // req.path will start likes /gw, /hh or /vw
+            addPath = '/' + req.path.substr(3);
+        res.redirect('https://p.eagate.573.jp/game/sdvx/' + version + '/p' + addPath);
+    //} else if (req.path === '/ps') {
+    //  // /ps will be worked configured by firebase,json
+    //         res.redirect('https://itunes.apple.com/jp/app/sdvxpsiv/id1287152421?mt=8');
+    } else if (/^floor\/?/i.test(pathWithoutSlash)) {
+        let addPath = req.path.substr(6);   // req.path starts with /floor
+        res.redirect('https://p.eagate.573.jp/game/sdvx/sv/p/floor/' + addPath);
+    } else if (/^[vx]?i{0,3}[vx]?\/?.*$/i.test(pathWithoutSlash)) {
+        let r = pathWithoutSlash.match(/^[vx]?i{0,3}[vx]?/i);
+        let version = r[0].toLowerCase();
+        if (version==='i')
+            version = 'sv';
+        let addPath = '/';
+        if (req.path.length>r[0].length)
+            addPath = '/'+req.path.substr(r[0].length+1);
+        res.redirect('https://p.eagate.573.jp/game/sdvx/' + version + '/p'+addPath);
+        //res.send('https://p.eagate.573.jp/game/sdvx/' + version + '/p'+addPath);
+    } else {
+        res.redirect('https://p.eagate.573.jp/game/sdvx/v/p'+req.path);
     }
 });
 /*
