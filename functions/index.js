@@ -3,6 +3,8 @@ const functions = require('firebase-functions');
 exports.index=functions.https.onRequest((req, res) => {
     console.info('req.path=',req.path);
     let pathWithoutSlash = (req.path !== null) ? req.path.substr(1) : '';
+    if (pathWithoutSlash.indexOf('/')>-1)
+        pathWithoutSlash = pathWithoutSlash.substr(0,pathWithoutSlash.indexOf('/'));
 
     if (req.path === null || req.path === '/') {
         let nextRelease = new Date();
@@ -13,29 +15,31 @@ exports.index=functions.https.onRequest((req, res) => {
             res.redirect('https://p.eagate.573.jp/game/sdvx/v/p');
         else
             res.redirect('https://p.eagate.573.jp/game/sdvx/iv/p');
-    } else if (/^\d+\/?/.test(pathWithoutSlash)) {
-        let r = req.path.match(/\d+/);  // req.path will start /3 or /4 or /5
-        let romanNum = numberToRoman(r[0]).toLowerCase();
+    } else if (/^\d+/.test(pathWithoutSlash)) {
+        let romanNum = numberToRoman(pathWithoutSlash).toLowerCase();
         if (romanNum === 'i')
             romanNum = 'sv';
         let addPath = '/';
-        if (req.path.length>(r[0].length+1))
-            addPath = req.path.substr(r[0].length+1);
+        if (req.path.length>(pathWithoutSlash.length+1))
+            addPath = req.path.substr(pathWithoutSlash.length+1);
         res.redirect('https://p.eagate.573.jp/game/sdvx/' + romanNum + '/p'+addPath);
         //res.send('https://p.eagate.573.jp/game/sdvx/' + romanNum + '/p'+addPath);
-    } else if (/^(gw|hh|vw)\/?/i.test(pathWithoutSlash)) {
+    } else if (/^(gw|hh|vw)/i.test(pathWithoutSlash)) {
         // Short code
         let version = 'sv';
         switch (pathWithoutSlash.substring(0, 2).toLowerCase()) {
-            case 'gw':
+            case 'sv':      // BOOTH
+                version = 'sv';
+                break;
+            case 'gw':      // GRAVITY WARS
                 version = 'iii';
-                break;     // GRAVITY WARS
-            case 'hh':
+                break;
+            case 'hh':      // Heavenly Haven
                 version = 'iv';
-                break;      // Heavenly Haven
-            case 'vw':
+                break;
+            case 'vw':      // Vivid Wave
                 version = 'v';
-                break;       // Vivid Wave
+                break;
         }
         let addPath = '';
         if (req.path.length > 3)    // req.path will start likes /gw, /hh or /vw
@@ -44,16 +48,16 @@ exports.index=functions.https.onRequest((req, res) => {
     //} else if (req.path === '/ps') {
     //  // /ps will be worked configured by firebase,json
     //         res.redirect('https://itunes.apple.com/jp/app/sdvxpsiv/id1287152421?mt=8');
-    } else if (/^floor\/?/i.test(pathWithoutSlash)) {
+    } else if (/^floor/i.test(pathWithoutSlash)) {
         let addPath = req.path.substr(6);   // req.path starts with /floor
         res.redirect('https://p.eagate.573.jp/game/sdvx/sv/p/floor/' + addPath);
-    } else if (/^[vx]?i{0,3}[vx]?\/?.*$/i.test(pathWithoutSlash)) {
-        let r = pathWithoutSlash.match(/^[vx]?i{0,3}[vx]?/i);
+    } else if (/^(?=[MDCLXVI])M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$/i.test(pathWithoutSlash)) {
+        let r = pathWithoutSlash.match(/^(?=[MDCLXVI])M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$/i);
         let version = r[0].toLowerCase();
         if (version==='i')
             version = 'sv';
         let addPath = '/';
-        if (req.path.length>r[0].length)
+        if (req.path.length>r[0].length+1)
             addPath = '/'+req.path.substr(r[0].length+1);
         res.redirect('https://p.eagate.573.jp/game/sdvx/' + version + '/p'+addPath);
         //res.send('https://p.eagate.573.jp/game/sdvx/' + version + '/p'+addPath);
@@ -61,17 +65,6 @@ exports.index=functions.https.onRequest((req, res) => {
         res.redirect('https://p.eagate.573.jp/game/sdvx/v/p'+req.path);
     }
 });
-/*
-// numeric
-app.get('/([0-9]+)', (req, res) => res.redirect(()=>{
-    return 'https://p.eagate.573.jp/game/sdvx/'+numberToRoman(req.params[0])+'/p';
-}));
-// support roman numeric
-app.get('/([ivxmc]+)', (req, res) => res.redirect(()=>{
-    return 'https://p.eagate.573.jp/game/sdvx/'req.params[0]+'/p';
-}));
-
-*/
 
 
 

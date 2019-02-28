@@ -13,11 +13,12 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [ {
+    "redirects" : [ {
       "source": "/ps",
       "destination": "https://itunes.apple.com/jp/app/sdvxpsiv/id1287152421?mt=8",
       "type": 302
-    }, {
+    } ],
+    "rewrites": [ {
       "source": "/",
       "function": "index"
     }, {
