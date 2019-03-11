@@ -26,9 +26,14 @@ when you access to `/4/profile/playdata`, then you will redirect to [Play data f
 
 # Requirements
 
-- [Firebase Hosting](https://firebase.google.com)
+## [Firebase Hosting](https://firebase.google.com/products/hosting/)
 
+Hosting for your domain
 
+## [Firebase Functions](https://firebase.google.com/products/functions/)
 
+Redirector works on NodeJS, because any name of path reads and redirects dynamically.
+
+# Rights
 
 The names of [SOUND VOLTEX](https://p.eagate.573.jp/game/sdvx/v/p/top) is a registered trademark of KONAMI Digital Entertainments Inc.
