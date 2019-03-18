@@ -1,7 +1,6 @@
-# [sdvx.net](https://sdvx.net)
+[sdvx.net](https://sdvx.net)
 
 Redirector to SOUND VOLTEX official page
-
 
 # Features
 
@@ -16,23 +15,23 @@ Redirector to SOUND VOLTEX official page
 
 `/<roman-numerals>` like `/iii`, `/iv` or `/v` will also redirect to each versions
 
+
 ## Quickly access under content
+
 Also you can redirects to under contents each versions.
 For example, if you want access your play data page of Heavenly Haven (version 4),
 when you access to `/4/profile/playdata`, then you will redirect to [Play data for Heavenly Haven](https://p.eagate.573.jp/game/sdvx/iv/p/playdata/profile/index.html) page. (You will need login for this page)
+
 ## Others
-- Redirect to related sites/pages
+
+Redirect to related sites/pages
+
 
 
 # Requirements
 
-## [Firebase Hosting](https://firebase.google.com/products/hosting/)
+- [Firebase Hosting](https://firebase.google.com)
 
-Hosting for your domain
-
-## [Firebase Functions](https://firebase.google.com/products/functions/)
-
-Redirector works on NodeJS, because any name of path reads and redirects dynamically.
 
 # Rights
 
