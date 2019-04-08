@@ -33,6 +33,6 @@ Redirect to related sites/pages
 - [Firebase Hosting](https://firebase.google.com)
 
 
-# Rights
+# Rightments
 
-The names of [SOUND VOLTEX](https://p.eagate.573.jp/game/sdvx/v/p/top) is a registered trademark of KONAMI Digital Entertainments Inc.
+The names of [SOUND VOLTEX](https://p.eagate.573.jp/game/sdvx/v/p/top) is a registered trademark of Konami Amusement Co., Ltd..
