@@ -13,8 +13,9 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "cleanUrls": true,
     "redirects" : [ {
-      "source": "/ps",
+      "source": "/apps/ps",
       "destination": "https://itunes.apple.com/jp/app/sdvxpsiv/id1287152421?mt=8",
       "type": 302
     } ],
