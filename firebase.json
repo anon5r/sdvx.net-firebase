@@ -18,6 +18,14 @@
       "source": "/apps/ps",
       "destination": "https://itunes.apple.com/jp/app/sdvxpsiv/id1287152421?mt=8",
       "type": 302
+    }, {
+      "source": "/eacsdvx",
+      "destination": "https://p.eagate.573.jp/game/eacsdvx/iii/p/common/top.html",
+      "type": 302
+    }, {
+      "source": "/cs",
+      "destination": "https://p.eagate.573.jp/game/eacsdvx/iii/p/common/top.html",
+      "type": 302
     } ],
     "rewrites": [ {
       "source": "/",
