@@ -1,11 +1,14 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <link href="//fonts.googleapis.com/css?family=Orbitron:500" rel="stylesheet">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron:500" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
   <link href="/assets/bemani_jackets.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script type="text/javascript" src="/assets/bemani_jackets.js" defer></script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -16,32 +19,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </head>
 <body>
 <h1>BEMANI Music Jackets</h1>
-<div class="ui two column stackable grid container">
-  <div class="ui column">
-    <div class="ui form">
-      <div class="field">
-        <select name="ac" id="select-ac" class="ui search dropdown">
-          <option value="">筐体を選択</option>
-        </select>
+<div id="app">
+  <div class="ui two column stackable grid container">
+    <div class="ui column">
+      <div class="ui form">
+        <div class="field">
+          <select name="game" id="select-game" class="ui search dropdown" v-model="game" @change="">
+            <option value="">&lt;Select Game&gt;</option>
+            <option v-for="(value, code) in arcadeList" :value="code">{{ value }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="ui column">
+      <div class="ui form">
+        <div class="field">
+          <select name="month" id="select-month" class="ui search dropdown" v-model="ym">
+            <option value="">&lt;Select Date&gt;</option>
+            <option v-for="dateObj in dateList" :value="dateObj.key">{{ dateObj.date }}</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
-  <div class="ui column">
-    <div class="ui form">
-      <div class="field">
-        <select name="month" id="select-month" class="ui search dropdown">
-          <option value="">日付を選択</option>
-        </select>
-      </div>
-    </div>
+  <hr>
+  <div class="ui segment" v-if="loaded">
+    <ul id="jacket-list">
+      <li class="img-row">
+        <img-jacket v-for="num in 30" :ym="ym" :game="game" :num="num" />
+      </li>
+    </ul>
+  </div>
+  <div v-else class="ui segment" id="img-empty">
+      筐体と日付を選択してください。
   </div>
 </div>
-<hr>
-<div class="ui segment">
-  <ul id="jacket-list"></ul>
-</div>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-<script type="text/javascript" src="/assets/bemani_jackets.js"></script>
 </body>
 </html>
