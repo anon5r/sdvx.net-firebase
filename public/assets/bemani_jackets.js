@@ -10,6 +10,11 @@ function zerofill(value, num){
     return (('0'+value).slice(num*-1));
 }
 const baseURL = 'https://p.eagate.573.jp/game/bemani/fansite/p';
+const imgWidth = (window.screen.width < 1024 ? Math.floor(window.screen.width / 2.5) : 200);
+const imgHeight = imgWidth;
+console.log('screen.width = ' + window.screen.width);
+console.log('imgWidth = ' + imgWidth);
+
 let date = new Date();
 
 //Vue.filter('zerofill',zerofill);
@@ -21,12 +26,14 @@ Vue.component('img-jacket', {
     ],
     data: () => {
         return {
-            'base': baseURL
-        }
+            'base': baseURL,
+            'width': imgWidth,
+            'height': imgHeight,
+    }
     },
     template: '<img ' +
         ' :src=\'`${base}/images/music/${ym}_jk/${ym}_${game}_${zerofillNum}.jpg`\'' +
-        ' width="200" height="200"' +
+        ' :width="`${width}`" :height="`${height}`"' +
         ' class="img-shadow img-load"' +
         ' v-on:error.self.capture="imgError">',
     computed: {
