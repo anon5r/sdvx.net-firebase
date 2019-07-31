@@ -8,7 +8,7 @@
   <meta property="og:url" content="https://sdvx.net/bemani_jackets">
   <meta property="og:image" content="https://sdvx.net/assets/ogp/bmj_tw.png">
   <meta property="og:site_name" content="BEMANI Music Jackets">
-  <meta property="og:description" content="BEMANIのジャケットを一覧できます">
+  <meta property="og:description" content="BEMANIジャケット画像を一覧表示！">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@anon5r">
 
@@ -31,6 +31,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
   <script type="text/javascript" src="/assets/bemani_jackets.js" defer></script>
+  <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -46,12 +47,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager (noscript) -->
 <h1>BEMANI Music Jackets</h1>
 <div id="app">
-  <div class="ui two column stackable grid container">
+  <div class="ui three column stackable grid container">
     <div class="ui column">
       <div class="ui form">
         <div class="field">
           <select name="game" id="select-game" class="ui search dropdown" v-model="game" @change="">
-            <option value="">&lt;Select Game&gt;</option>
+            <option value="" disabled selected>Select Game</option>
             <option v-for="(value, code) in arcadeList" :value="code">{{ value }}</option>
           </select>
         </div>
@@ -61,12 +62,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="ui form">
         <div class="field">
           <select name="month" id="select-month" class="ui search dropdown" v-model="ym">
-            <option value="">&lt;Select Date&gt;</option>
+            <option value="" disabled selected>Select Date</option>
             <option v-for="dateObj in dateList" :value="dateObj.key">{{ dateObj.date }}</option>
           </select>
         </div>
       </div>
     </div>
+    <div class="ui column"></div>
   </div>
   <hr>
   <div class="ui segment" v-if="loaded">
@@ -77,7 +79,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </ul>
   </div>
   <div v-else class="ui segment" id="img-empty">
-      筐体と日付を選択してください。
+    <p>筐体と日付を選択してください。</p>
+    <p>主に前月以前に追加された楽曲のジャケット画像を一覧できます。ただし月が変わった直後は表示できません。<a href="https://p.eagate.573.jp/game/bemani/fansite/p/">BEMANI Fan Site</a>が更新されると表示されます。</p>
+    <p>版権曲や外部権利楽曲についてはここに表示されないことが多いです。</p>
+    <div>
+      <div class="field">
+        <a class="twitter-share-button"
+           href="https://twitter.com/intent/tweet?text=BEMANI楽曲ジャケット"
+           data-size="large">
+          Tweet</a>
+      </div>
+    </div>
   </div>
 </div>
 </body>

@@ -9,11 +9,16 @@ function imgError(e){
 function zerofill(value, num){
     return (('0'+value).slice(num*-1));
 }
+
 const baseURL = 'https://p.eagate.573.jp/game/bemani/fansite/p';
-const imgWidth = (window.screen.width < 1024 ? Math.floor(window.screen.width / 2.5) : 200);
-const imgHeight = imgWidth;
-console.log('screen.width = ' + window.screen.width);
-console.log('imgWidth = ' + imgWidth);
+let size = 200;
+if (document.body.clientWidth < 1024) {
+    size = Math.floor(document.body.clientWidth / 2.6);
+    if (size > 200) size = 200;
+}
+const imgSize = size;
+
+
 
 let date = new Date();
 
@@ -26,8 +31,8 @@ Vue.component('img-jacket', {
     data: () => {
         return {
             'base': baseURL,
-            'width': imgWidth,
-            'height': imgHeight,
+            'width': imgSize,
+            'height': imgSize
         };
     },
     template: '<img ' +
