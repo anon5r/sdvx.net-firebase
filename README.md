@@ -5,13 +5,13 @@ Redirector to SOUND VOLTEX official page
 # Features
 
 - Redirect to official page
-  - `/` to Latest of official page
-  - `/booth` or `/1` to [SOUND VOLTEX Booth](https://p.eagate.573.jp/game/sdvx/sv/p)
-  - `/2` to [SOUND VOLTEX ii -Infinite Infection-](https://p.eagate.573.jp/game/sdvx/ii/p)
-  - `/3` to [SOUND VOLTEX III -GRAVITY WARS-](https://p.eagate.573.jp/game/sdvx/iii/p)
-  - `/4` to [SOUND VOLTEX IV -Heavenly Haven-](https://p.eagate.573.jp/game/sdvx/iv/p)
-  - `/5` to [SOUND VOLTEX V -Vivid Wave-](https://p.eagate.573.jp/game/sdvx/v/p)
-  - `/floor` to [SOUND VOLTEX FLOOR](https://p.eagate.573.jp/game/sdvx/sv/p/floor/)
+  - `/` redirects to Latest of official page
+  - `/1` or `/booth` redirects to [SOUND VOLTEX Booth](https://p.eagate.573.jp/game/sdvx/sv/p)
+  - `/2` redirects to [SOUND VOLTEX ii -Infinite Infection-](https://p.eagate.573.jp/game/sdvx/ii/p)
+  - `/3` redirects to [SOUND VOLTEX III -GRAVITY WARS-](https://p.eagate.573.jp/game/sdvx/iii/p)
+  - `/4` redirects to [SOUND VOLTEX IV -Heavenly Haven-](https://p.eagate.573.jp/game/sdvx/iv/p)
+  - `/5` redirects to [SOUND VOLTEX V -Vivid Wave-](https://p.eagate.573.jp/game/sdvx/v/p)
+  - `/floor` redirects to [SOUND VOLTEX FLOOR](https://p.eagate.573.jp/game/sdvx/sv/p/floor/)
 
 `/<roman-numerals>` like `/iii`, `/iv` or `/v` will also redirect to each versions
 
@@ -26,11 +26,14 @@ when you access to `/4/profile/playdata`, then you will redirect to [Play data f
 
 Redirect to related sites/pages
 
+### Original content
 
+- `/bemani_jackets.html` BEMANI song jacket viewer
 
 # Requirements
 
-- [Firebase Hosting](https://firebase.google.com)
+- [Firebase Hosting](https://firebase.google.com/products/hosting/)
+- [Firebase Functions](https://firebase.google.com/products/functions/)
 
 
 # Rightments
