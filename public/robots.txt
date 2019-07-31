@@ -1,0 +1,3 @@
+User-Agent: *
+Allow: /bemani_jackets/
+Allow: /bemani_jackets.html
