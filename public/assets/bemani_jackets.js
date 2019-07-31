@@ -17,7 +17,6 @@ console.log('imgWidth = ' + imgWidth);
 
 let date = new Date();
 
-//Vue.filter('zerofill',zerofill);
 Vue.component('img-jacket', {
     props: [
         'ym',
@@ -29,7 +28,7 @@ Vue.component('img-jacket', {
             'base': baseURL,
             'width': imgWidth,
             'height': imgHeight,
-    }
+        };
     },
     template: '<img ' +
         ' :src=\'`${base}/images/music/${ym}_jk/${ym}_${game}_${zerofillNum}.jpg`\'' +
@@ -44,7 +43,7 @@ Vue.component('img-jacket', {
     created: function() {
         this.base = baseURL;
     },
-    updated: () =>{
+    updated: () => {
         let img=document.getElementsByClassName('img-load');
         for (let i in img) {
             if (img[i].classList.contains("img-hidden"))
@@ -88,14 +87,12 @@ const vm = new Vue({
             vm.$forceUpdate();
             if (this.ym!=='')
                 this.loaded = true;
-            //vm.$forceUpdate();
         },
         ym: function(val,old){
             this.loaded = false;
             vm.$forceUpdate();
             if (this.game!=='')
                 this.loaded = true;
-            //vm.$forceUpdate();
         }
     },
     methods: {
