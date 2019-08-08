@@ -1,5 +1,8 @@
 const functions = require('firebase-functions');
 
+const LATEST_URL = 'https://p.eagate.573.jp/game/sdvx/v/p';
+const RECENT_URL = 'https://p.eagate.573.jp/game/sdvx/iv/p';
+
 exports.index=functions.https.onRequest((req, res) => {
     console.info('req.path=',req.path);
     let pathWithoutSlash = (req.path !== null) ? req.path.substr(1) : '';
@@ -12,9 +15,9 @@ exports.index=functions.https.onRequest((req, res) => {
         nextRelease.setMonth(1);	// Feb
         nextRelease.setDate(28);	// 28
         if (Date.now() >= nextRelease.getTime())
-            res.redirect('https://p.eagate.573.jp/game/sdvx/v/p');
+            res.redirect(LATEST_URL);
         else
-            res.redirect('https://p.eagate.573.jp/game/sdvx/iv/p');
+            res.redirect(RECENT_URL);
     } else if (/^\d+/.test(pathWithoutSlash)) {
         let romanNum = numberToRoman(pathWithoutSlash).toLowerCase();
         if (romanNum === 'i')
@@ -62,7 +65,7 @@ exports.index=functions.https.onRequest((req, res) => {
         res.redirect('https://p.eagate.573.jp/game/sdvx/' + version + '/p'+addPath);
         //res.send('https://p.eagate.573.jp/game/sdvx/' + version + '/p'+addPath);
     } else {
-        res.redirect('https://p.eagate.573.jp/game/sdvx/v/p'+req.path);
+        res.redirect(LATEST_URL+req.path);
     }
 });
 
