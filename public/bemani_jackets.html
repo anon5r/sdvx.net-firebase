@@ -74,7 +74,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="ui segment" v-if="loaded">
     <ul id="jacket-list">
       <li class="img-row">
-        <img-jacket v-for="num in 30" :ym="ym" :game="game" :num="num" />
+        <img-jacket v-for="(num, index) in 30" :ym="ym" :game="game" :num="index" />
       </li>
     </ul>
   </div>
