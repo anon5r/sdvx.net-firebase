@@ -30,6 +30,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script src="https://kit.fontawesome.com/97cfb7b1ea.js"></script>
   <script type="text/javascript" src="/assets/bemani_jackets.js" defer></script>
   <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
   <!-- Google Tag Manager -->
@@ -50,21 +51,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="ui three column stackable grid container">
     <div class="ui column">
       <div class="ui form">
-        <div class="field">
-          <select name="game" id="select-game" class="ui search dropdown" v-model="game" @change="">
-            <option value="" disabled selected>Select Game</option>
-            <option v-for="(value, code) in arcadeList" :value="code">{{ value }}</option>
-          </select>
+        <div class="inline fields">
+          <div class="sixteen wide field">
+            <label class="ui label"><i class="fas fa-compact-disc"></i></label>
+            <select name="game" id="select-game" class="ui search dropdown" v-model="game" @change="">
+              <option value="" disabled selected>Select Game</option>
+              <option v-for="(value, code) in arcadeList" :value="code">{{ value }}</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
     <div class="ui column">
       <div class="ui form">
-        <div class="field">
-          <select name="month" id="select-month" class="ui search dropdown" v-model="ym">
-            <option value="" disabled selected>Select Date</option>
-            <option v-for="dateObj in dateList" :value="dateObj.key">{{ dateObj.date }}</option>
-          </select>
+        <div class="inline fields">
+          <div class="sixteen wide field">
+            <label class="ui label"><i class="fal fa-calendar-alt"></i></label>
+            <select name="month" id="select-month" class="ui search dropdown" v-model="ym">
+              <option value="" disabled selected>Select Date</option>
+              <option v-for="dateObj in dateList" :value="dateObj.key">{{ dateObj.date }}</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
