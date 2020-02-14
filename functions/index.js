@@ -26,14 +26,14 @@ exports.index=functions.https.onRequest((req, res) => {
         if (req.path.length>(pathWithoutSlash.length+1))
             addPath = req.path.substr(pathWithoutSlash.length+1);
         res.redirect('https://p.eagate.573.jp/game/sdvx/' + romanNum + '/p'+addPath);
-        //res.send('https://p.eagate.573.jp/game/sdvx/' + romanNum + '/p'+addPath);
     } else if (/^(gw|hh|vw)/i.test(pathWithoutSlash)) {
-        // Short code
+        // Aliases short code
         let version = 'sv';
         switch (pathWithoutSlash.substring(0, 2).toLowerCase()) {
             case 'sv':      // BOOTH
                 version = 'sv';
                 break;
+            // Infinity Infection is same as ii
             case 'gw':      // GRAVITY WARS
                 version = 'iii';
                 break;
@@ -48,9 +48,6 @@ exports.index=functions.https.onRequest((req, res) => {
         if (req.path.length > 3)    // req.path will start likes /gw, /hh or /vw
             addPath = '/' + req.path.substr(3);
         res.redirect('https://p.eagate.573.jp/game/sdvx/' + version + '/p' + addPath);
-    //} else if (req.path === '/ps') {
-    //  // /ps will be worked configured by firebase,json
-    //         res.redirect('https://itunes.apple.com/jp/app/sdvxpsiv/id1287152421?mt=8');
     } else if (/^floor/i.test(pathWithoutSlash)) {
         let addPath = req.path.substr(6);   // req.path starts with /floor
         res.redirect('https://p.eagate.573.jp/game/sdvx/sv/p/floor/' + addPath);
@@ -63,7 +60,6 @@ exports.index=functions.https.onRequest((req, res) => {
         if (req.path.length>r[0].length+1)
             addPath = '/'+req.path.substr(r[0].length+1);
         res.redirect('https://p.eagate.573.jp/game/sdvx/' + version + '/p'+addPath);
-        //res.send('https://p.eagate.573.jp/game/sdvx/' + version + '/p'+addPath);
     } else {
         res.redirect(LATEST_URL+req.path);
     }
