@@ -1,6 +1,6 @@
 const functions = require('firebase-functions');
 
-const LATEST_URL = 'https://p.eagate.573.jp/game/sdvx/v/p';
+const LATEST_URL = 'https://p.eagate.573.jp/game/sdvx/vi/';
 const RECENT_URL = 'https://p.eagate.573.jp/game/sdvx/v/p';
 
 const runtimeOpts = {
@@ -19,9 +19,9 @@ exports.index=functions
         
         if (req.path === null || req.path === '/') {
             let nextRelease = new Date();
-            nextRelease.setFullYear(2019);	// 2019
+            nextRelease.setFullYear(2021);	// 2021
             nextRelease.setMonth(1);	// Feb
-            nextRelease.setDate(28);	// 28
+            nextRelease.setDate(17);	// 17
             if (Date.now() >= nextRelease.getTime())
                 redirectURL = LATEST_URL;
             else
