@@ -17,6 +17,8 @@ on:
 jobs:
   deploy-hosting:
     name: Deploy Hosting
+    environment: 
+      name: firebase-deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -24,6 +26,7 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
+          slot-name: firebase-deploy
           args: deploy --only hosting --message \"${{ github.event.head_commit.message }}\"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
@@ -36,6 +39,7 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
+          slot-name: firebase-deploy
           args: deploy --only functions --message \"${{ github.event.head_commit.message }}\"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
