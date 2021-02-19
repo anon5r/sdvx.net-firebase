@@ -1,6 +1,6 @@
 const functions = require('firebase-functions');
 
-const LATEST_URL = 'https://p.eagate.573.jp/game/sdvx/vi/';
+const LATEST_URL = 'https://p.eagate.573.jp/game/sdvx/vi';
 const RECENT_URL = 'https://p.eagate.573.jp/game/sdvx/v/p';
 
 const runtimeOpts = {
@@ -9,6 +9,7 @@ const runtimeOpts = {
 }
 
 exports.index=functions
+    .region('asia-northeast1')
     .runWith(runtimeOpts)
     .https.onRequest((req, res) => {
         console.info('req.path=',req.path);
