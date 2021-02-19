@@ -66,6 +66,7 @@ const vm = new Vue({
         arcadeList: {
             "iidx"  : "BEATMANIA IIDX",
             "sv"    : "SOUND VOLTEX",
+            "ksv"   : "SOUND VOLTEX (コナステ)",
             "jb"    : "jubeat",
             "nst"   : "ノスタルジア",
             "po"    : "pop'n music",
@@ -76,6 +77,9 @@ const vm = new Vue({
             "bs"    : "BEAT STREAM",
             "msc"   : "MÚSECA",
             "rb"    : "REFLEC BEAT",
+            "ban01" : "バンめし♪ ふるさとグランプリ ROUND1 ～春の陣～",
+            "ban02" : "バンめし♪ ふるさとグランプリ ROUND2 ～夏の陣～",
+            "bjm2020": "いちかのBEMANI超じゃんけん大会2020",
         },
         dateList: [],
         jackets: [],
