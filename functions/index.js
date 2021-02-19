@@ -9,7 +9,7 @@ const runtimeOpts = {
 }
 
 exports.index=functions
-    .region('asia-northeast1')
+    // .region('asia-northeast1')
     .runWith(runtimeOpts)
     .https.onRequest((req, res) => {
         console.info('req.path=',req.path);
