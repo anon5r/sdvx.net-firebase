@@ -106,14 +106,32 @@ const vm = new Vue({
     },
     methods: {
         listDate: function() {
-            let current=((date.getFullYear()*100)+(date.getMonth()));
-            if (date.getMonth()<1)
-                current=((date.getFullYear()-1)*100+12);
-            for(let y=date.getFullYear(); y >=2014; y--){
+            let seasonMap=['w','w','w','sp','sp','sp','sm','sm','sm','au','au','au'],
+            seasons={'w':'Winter','sp':'Spring','sm':'Summer','au':'Autumn'},
+            currentYM=((date.getFullYear()*100)+(date.getMonth()+1)),
+            currentYS=(date.getFullYear().toString()+seasonMap[date.getMonth()+1]);
+            if (date.getMonth()<1) {
+                currentYM=((date.getFullYear()-1)*100+12);
+                currentYS=(date.getFullYear().toString()+seasonMap[seasonMap.length-1]);
+            }
+            let prvYS='';
+            for(let y=date.getFullYear(); y > 2020; y--){
+                for(let m=12; m >= 1; m--){
+                    let ym=(y*100)+m;
+                    if(ym < 202101) break;
+                    if(ym > currentYM) continue;
+                    let s=seasonMap[m];
+                    let ys=y.toString()+s;
+                    if(ys === prvYS) continue;
+                    this.dateList.push({key:ys, date:(y+" "+seasons[s])});
+                    prvYS=ys;
+                }
+            }
+            for(let y=2020; y >=2014; y--){
                 for(let m=12; m >= 1; m--){
                     let ym=(y*100)+m;
                     if(ym < 201411) break;
-                    if(ym > current) continue;
+                    if(ym > currentYM) continue;
                     this.dateList.push({key:ym, date:(y+"年"+(("0"+m).slice(-2))+"月")});
                 }
             }
